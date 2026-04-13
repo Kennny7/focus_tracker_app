@@ -1,706 +1,321 @@
-# 
+# Focus Tracker App
+
+> **A cross-platform desktop focus timer that punishes distractions.**  
+> *No internet, no database, no backend – pure local Flutter.*
+
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/Kennny7/focus_tracker_app)
+![License](https://img.shields.io/github/license/Kennny7/focus_tracker_app)
+![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS-blue)
+![Stars](https://img.shields.io/github/stars/Kennny7/focus_tracker_app?style=social)
+![Issues](https://img.shields.io/github/issues/Kennny7/focus_tracker_app)
+
+---
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Screenshots](#screenshots)
+- [Key Features](#key-features)
+- [Project Structure](#project-structure)
+- [Technologies Used](#technologies-used)
+- [Workflow Diagram](#workflow-diagram)
+- [Prerequisites](#prerequisites)
+- [Installation & First Run](#installation--first-run)
+  - [Windows](#windows)
+  - [macOS](#macos)
+- [Customisation Guide](#customisation-guide)
+- [Building Standalone Executables](#building-standalone-executables)
+- [How It Works – Deep Dive](#how-it-works--deep-dive)
+- [Troubleshooting](#troubleshooting)
+- [License](#license)
+- [Contributing](#contributing)
+- [Roadmap](#roadmap)
+- [Support](#support)
+
+---
+
+## Overview
+
+The Focus Tracker App is a **distraction-punishing productivity tool** designed for people who struggle to stay focused on their computer.
+
+When you:
+- Minimise the app
+- Switch to another window
+- Let the timer run out
+
+The app punishes you with:
+- 🔊 Loud sound  
+- 💬 Random insult  
+- 🔁 Optional timer reset  
+
+**Fully offline. Fully local. Zero tracking.**
+
+---
+
+## Screenshots
+
+> Add screenshots here after first build
+
+```
+
+/assets/screenshots/home.png
+/assets/screenshots/stats.png
+
+```
+
+---
+
+## Key Features
+
+| Feature | Description |
+|--------|-------------|
+| Pomodoro timer | Custom focus/break cycles |
+| Focus monitoring | Detects minimize & focus loss |
+| Punishment system | Sound + insult + reset |
+| Grace period | 3-second recovery window |
+| Statistics dashboard | Track productivity |
+| Achievements | Streak-based rewards |
+| Custom sound | User-selected punishment audio |
+| CSV export | Export session logs |
+| Shortcuts | Space / Esc controls |
+| System tray | Background operation |
+| Themes | Dark / Light |
+| Opacity | Adjustable transparency |
+
+---
+
+## Project Structure
+
+<details>
+<summary>Click to expand</summary>
+
+```
+
+focus_tracker_app/
+├── assets/
+│ ├── icon.ico
+│ ├── icon.png
+│ └── sounds/
+│ └── punishment.mp3
+├── lib/
+│ ├── main.dart
+│ ├── models/
+│ │ └── focus_session.dart
+│ ├── screens/
+│ │ ├── home_screen.dart
+│ │ └── stats_screen.dart
+│ ├── services/
+│ │ ├── timer_service.dart
+│ │ ├── focus_monitor.dart
+│ │ ├── punishment_service.dart
+│ │ ├── audio_service.dart
+│ │ ├── stats_service.dart
+│ │ └── achievement_service.dart
+│ ├── utils/
+│ │ ├── constants.dart
+│ │ └── keyboard_shortcuts.dart
+│ └── widgets/
+│ ├── timer_display.dart
+│ ├── control_buttons.dart
+│ ├── duration_selector.dart
+│ ├── settings_panel.dart
+│ ├── stats_dashboard.dart
+│ └── achievement_badge.dart
+├── pubspec.yaml
+├── LICENSE.md
+└── README.md
 
-# ```markdown
+```
+</details>
 
-# \# Focus Tracker App
+---
 
-# 
+## Technologies Used
 
-# > \*\*A cross-platform desktop focus timer that punishes distractions.\*\*  
+| Technology 					| Purpose                                 |
+|-------------------------------|-----------------------------------------|
+| Flutter (Dart) 				| Cross-platform UI framework    		  |
+| window_manager 				| Window events, focus detection, opacity |
+| tray_manager 					| System tray integration 				  |
+| audioplayers 					| Play sound 							  |
+| shared_preferences 			| Local storage 						  |
+| file_picker 					| Select custom files 					  |
+| path_provider 				| File system paths 					  |
+| csv 							| Export data 							  |
+| flutter_local_notifications 	| Optional notifications 				  |
 
-# > \*No internet, no database, no backend – pure local Flutter.\*
+All packages are fully offline. No tracking. No API calls.
 
-# 
+---
 
-# !\[GitHub release (latest by date)](https://img.shields.io/github/v/release/Kennny7/focus-tracker-app)
+## Workflow Diagram
 
-# !\[License](https://img.shields.io/github/license/Kennny7/focus-tracker-app)
+```mermaid
+graph TD
+  A[Start Timer] --> B{In Focus?}
+  B -- Yes --> C[Countdown]
+  C --> D{Finished?}
+  D -- Yes --> E[Success]
+  D -- No --> B
+  B -- No --> G[Grace Period]
+  G --> H{Recovered?}
+  H -- Yes --> B
+  H -- No --> I[Punishment]
+````
 
-# !\[Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS-blue)
+---
 
-# 
+## Prerequisites
 
-# \---
+* Flutter SDK
+* Git
 
-# 
+### Windows
 
-# \## Table of Contents
+* Visual Studio 2022 (C++)
 
-# 
+### macOS
 
-# \- \[Overview](#overview)
+* Xcode
+* CocoaPods
 
-# \- \[Key Features](#key-features)
+```bash
+flutter config --enable-windows-desktop
+flutter config --enable-macos-desktop
+```
 
-# \- \[Project Structure](#project-structure)
+---
 
-# \- \[Technologies Used](#technologies-used)
+## Installation & First Run
 
-# \- \[Workflow Diagram](#workflow-diagram)
+### Windows
 
-# \- \[Prerequisites](#prerequisites)
+```bash
+flutter pub get
+flutter run -d windows
+```
 
-# \- \[Installation \& First Run](#installation--first-run)
+### macOS
 
-# \- \[Windows](#windows)
+```bash
+flutter pub get
+flutter run -d macos
+```
 
-# \- \[macOS](#macos)
+---
 
-# \- \[Customisation Guide](#customisation-guide)
+## Customisation Guide
 
-# \- \[Change the App Icon](#change-the-app-icon)
+### App Icon
 
-# \- \[Replace the Punishment Sound](#replace-the-punishment-sound)
+Replace:
 
-# \- \[Edit the Insults List](#edit-the-insults-list)
+* assets/icon.ico
+* assets/icon.png
 
-# \- \[Building Standalone Executables](#building-standalone-executables)
+### Sound
 
-# \- \[Build .exe (Windows)](#build-exe-windows)
+Replace:
 
-# \- \[Build .app (macOS)](#build-app-macos)
+```
+assets/sounds/punishment.mp3
+```
 
-# \- \[How It Works – Deep Dive](#how-it-works--deep-dive)
+### Insults
 
-# \- \[Troubleshooting](#troubleshooting)
+Edit:
 
-# \- \[License](#license)
+```
+lib/utils/constants.dart
+```
 
-# \- \[Contributing](#contributing)
+---
 
-# \- \[Roadmap](#roadmap)
+## Building Standalone Executables
 
-# 
+### Windows
 
-# \---
+```bash
+flutter build windows --release
+```
 
-# 
+### macOS
 
-# \## Overview
+```bash
+flutter build macos --release
+```
 
-# 
+---
 
-# The Focus Tracker App is a \*\*distraction-punishing productivity tool\*\* designed for people who struggle to stay focused on their computer. When you minimise the app, switch to another window, or let the timer run out, the app “punishes” you with:
+## How It Works – Deep Dive
 
-# 
+### Focus Detection
 
-# \- A loud, customisable sound  
+Uses window_manager for:
 
-# \- A random insult from a built-in list  
+* Focus loss
+* Minimize detection
 
-# \- \*(Optional)\* resetting the timer to zero  
+### Punishment
 
-# 
+* Random insult
+* Dialog popup
+* Optional sound + reset
 
-# It runs entirely offline, stores all data locally, and works identically on Windows and macOS.
+### Storage
 
-# 
+* Local via SharedPreferences
 
-# \---
+### Tray
 
-# 
+* Runs in background
+* Click to restore
 
-# \## Key Features
+---
 
-# 
+## Troubleshooting
 
-# | Feature                     | Description                                                                 |
+| Issue        | Fix            |
+| ------------ | -------------- |
+| No tray icon | flutter clean  |
+| No sound     | Check file     |
+| Keys fail    | Focus window   |
+| Build error  | flutter doctor |
 
-# |----------------------------|-----------------------------------------------------------------------------|
+---
 
-# | Pomodoro timer             | Focus / short break / long break cycles, fully adjustable.                 |
+## License
 
-# | Focus monitoring           | Detects when the app loses focus or is minimised.                          |
+MIT License
 
-# | Punishment system          | Sound + insult popup + timer reset (toggleable “Strict Mode”).             |
+---
 
-# | Grace period (3 sec)       | Gives you time to return before punishment triggers.                       |
+## Contributing
 
-# | Statistics dashboard       | Tracks daily, weekly, total focus time and number of punishments.          |
+1. Fork
+2. Create branch
+3. Commit
+4. Push
+5. Pull Request
 
-# | Achievements \& streaks     | Unlock badges for consecutive distraction-free sessions.                   |
+---
 
-# | Custom punishment sound    | Pick any MP3/WAV file from your disk.                                      |
+## Roadmap
 
-# | CSV export                 | Export all focus sessions to a CSV file.                                   |
+* [ ] Idle detection
+* [ ] Webcam tracking
+* [ ] JSON imports
+* [ ] Cloud sync
+* [ ] Advanced punishments
 
-# | Keyboard shortcuts         | Space = start/pause, Esc = reset.                                          |
+---
 
-# | System tray support        | App stays in tray when closed – left-click to restore, right-click menu.   |
+## Support
 
-# | Dark / light mode          | Switchable, with persistent preference.                                    |
+[https://github.com/Kennny7/focus_tracker_app/issues](https://github.com/Kennny7/focus_tracker_app/issues)
 
-# | Window opacity control     | Make the window semi-transparent.                                          |
+---
 
-# 
+**Stay focused — or pay the price.**
 
-# \---
-
-# 
-
-# \## Project Structure
-
-# 
-
-# <details>
-
-# <summary>Click to expand/collapse the full tree</summary>
-
-# 
-
-# ```
-
-# 
-
-# focus\_tracker\_app/
-
-# ├── assets/
-
-# │   ├── icon.ico
-
-# │   ├── icon.png
-
-# │   └── sounds/
-
-# │       └── punishment.mp3
-
-# ├── lib/
-
-# │   ├── main.dart
-
-# │   ├── models/
-
-# │   │   └── focus\_session.dart
-
-# │   ├── screens/
-
-# │   │   ├── home\_screen.dart
-
-# │   │   └── stats\_screen.dart
-
-# │   ├── services/
-
-# │   │   ├── timer\_service.dart
-
-# │   │   ├── focus\_monitor.dart
-
-# │   │   ├── punishment\_service.dart
-
-# │   │   ├── audio\_service.dart
-
-# │   │   ├── stats\_service.dart
-
-# │   │   └── achievement\_service.dart
-
-# │   ├── utils/
-
-# │   │   ├── constants.dart
-
-# │   │   └── keyboard\_shortcuts.dart
-
-# │   └── widgets/
-
-# │       ├── timer\_display.dart
-
-# │       ├── control\_buttons.dart
-
-# │       ├── duration\_selector.dart
-
-# │       ├── settings\_panel.dart
-
-# │       ├── stats\_dashboard.dart
-
-# │       └── achievement\_badge.dart
-
-# ├── pubspec.yaml
-
-# └── README.md
-
-# 
-
-# ````
-
-# 
-
-# </details>
-
-# 
-
-# \---
-
-# 
-
-# \## Technologies Used
-
-# 
-
-# | Technology                    | Purpose                                                |
-
-# |-----------------------------|--------------------------------------------------------|
-
-# | Flutter (Dart)              | Cross-platform UI framework                            |
-
-# | window\_manager              | Window events, focus detection, opacity                |
-
-# | tray\_manager                | System tray integration                               |
-
-# | audioplayers                | Play sound                                             |
-
-# | shared\_preferences          | Local storage                                          |
-
-# | file\_picker                 | Select custom files                                    |
-
-# | path\_provider               | File system paths                                      |
-
-# | csv                         | Export data                                            |
-
-# | flutter\_local\_notifications | Optional notifications                                 |
-
-# 
-
-# All packages are fully offline. No tracking. No API calls.
-
-# 
-
-# \---
-
-# 
-
-# \## Workflow Diagram
-
-# 
-
-# ```mermaid
-
-# graph TD
-
-#   A\[User starts timer] --> B{App in focus?}
-
-#   B -- Yes --> C\[Timer counts down]
-
-#   C --> D{Time == 0?}
-
-#   D -- Yes --> E\[Record successful session]
-
-#   E --> F\[Switch to break mode]
-
-#   D -- No --> B
-
-#   B -- No --> G\[Start 3s grace period]
-
-#   G --> H{Focus regained within 3s?}
-
-#   H -- Yes --> B
-
-#   H -- No --> I\[Punishment triggered]
-
-#   I --> J{Strict Mode?}
-
-#   J -- Yes --> K\[Play sound + insult + reset]
-
-#   J -- No --> L\[Insult only]
-
-#   K --> M\[Record punished session]
-
-#   L --> M
-
-#   M --> N\[Update stats]
-
-#   N --> B
-
-# ````
-
-# 
-
-# \---
-
-# 
-
-# \## Prerequisites
-
-# 
-
-# \* Flutter SDK
-
-# \* Git (optional)
-
-# 
-
-# \*\*Windows\*\*
-
-# 
-
-# \* Visual Studio 2022 (C++ workload)
-
-# 
-
-# \*\*macOS\*\*
-
-# 
-
-# \* Xcode
-
-# \* CocoaPods
-
-# 
-
-# Enable desktop:
-
-# 
-
-# ```bash
-
-# flutter config --enable-windows-desktop
-
-# flutter config --enable-macos-desktop
-
-# ```
-
-# 
-
-# \---
-
-# 
-
-# \## Installation \& First Run
-
-# 
-
-# \### Windows
-
-# 
-
-# ```bash
-
-# flutter pub get
-
-# flutter run -d windows
-
-# ```
-
-# 
-
-# \### macOS
-
-# 
-
-# ```bash
-
-# flutter pub get
-
-# flutter run -d macos
-
-# ```
-
-# 
-
-# \---
-
-# 
-
-# \## Customisation Guide
-
-# 
-
-# \### Change the App Icon
-
-# 
-
-# Replace:
-
-# 
-
-# \* `assets/icon.ico`
-
-# \* `assets/icon.png`
-
-# 
-
-# Rebuild afterward.
-
-# 
-
-# \---
-
-# 
-
-# \### Replace the Punishment Sound
-
-# 
-
-# Replace:
-
-# 
-
-# ```
-
-# assets/sounds/punishment.mp3
-
-# ```
-
-# 
-
-# Or use in-app selector.
-
-# 
-
-# \---
-
-# 
-
-# \### Edit the Insults List
-
-# 
-
-# File:
-
-# 
-
-# ```
-
-# lib/utils/constants.dart
-
-# ```
-
-# 
-
-# Example:
-
-# 
-
-# ```dart
-
-# static const List<String> insults = \[
-
-# "Your custom insult here",
-
-# ];
-
-# ```
-
-# 
-
-# \---
-
-# 
-
-# \## Building Standalone Executables
-
-# 
-
-# \### Windows
-
-# 
-
-# ```bash
-
-# flutter build windows --release
-
-# ```
-
-# 
-
-# Output:
-
-# 
-
-# ```
-
-# build/windows/runner/Release/
-
-# ```
-
-# 
-
-# \---
-
-# 
-
-# \### macOS
-
-# 
-
-# ```bash
-
-# flutter build macos --release
-
-# ```
-
-# 
-
-# Output:
-
-# 
-
-# ```
-
-# build/macos/Build/Products/Release/
-
-# ```
-
-# 
-
-# \---
-
-# 
-
-# \## How It Works – Deep Dive
-
-# 
-
-# \### Focus Detection
-
-# 
-
-# Uses `window\_manager` to detect:
-
-# 
-
-# \* Focus loss
-
-# \* Minimize events
-
-# 
-
-# Triggers grace period → punishment.
-
-# 
-
-# \---
-
-# 
-
-# \### Punishment Execution
-
-# 
-
-# \* Random insult
-
-# \* Popup dialog
-
-# \* Optional sound + reset
-
-# 
-
-# \---
-
-# 
-
-# \### Statistics \& Achievements
-
-# 
-
-# Stored locally using `SharedPreferences`.
-
-# 
-
-# \---
-
-# 
-
-# \### System Tray
-
-# 
-
-# \* Left click → restore
-
-# \* Right click → menu
-
-# \* Close button → minimize to tray
-
-# 
-
-# \---
-
-# 
-
-# \## Troubleshooting
-
-# 
-
-# | Issue             | Fix                  |
-
-# | ----------------- | -------------------- |
-
-# | No tray icon      | `flutter clean`      |
-
-# | Sound not working | Check file exists    |
-
-# | Keys not working  | Focus window         |
-
-# | Build fails       | Run `flutter doctor` |
-
-# 
-
-# \---
-
-# 
-
-# \## License
-
-# 
-
-# MIT License.
-
-# 
-
-# \---
-
-# 
-
-# \## Contributing
-
-# 
-
-# 1\. Fork
-
-# 2\. Branch
-
-# 3\. Commit
-
-# 4\. Push
-
-# 5\. PR
-
-# 
-
-# \---
-
-# 
-
-# \## Roadmap
-
-# 
-
-# \* \[ ] Idle detection
-
-# \* \[ ] Webcam tracking
-
-# \* \[ ] JSON insult import
-
-# \* \[ ] Cloud sync (optional)
-
-# \* \[ ] Advanced punishments
-
-# 
-
-# \---
-
-# 
-
-# \## Support
-
-# 
-
-# Open an issue:
-
-# \[https://github.com/Kennny7/focus\_tracker\_app/issues](https://github.com/Kennny7/focus\_tracker\_app/issues)
-
-# 
-
-# \---
-
-# 
-
-# \*\*Stay focused — or pay the price.\*\*
 

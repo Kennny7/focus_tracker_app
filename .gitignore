@@ -1,268 +1,108 @@
 ############################################
+
 # GENERAL
+
 ############################################
-# OS files
 .DS_Store
 Thumbs.db
-ehthumbs.db
 Desktop.ini
-$RECYCLE.BIN/
-Icon?
-
-# Temporary files
-*.tmp
-*.temp
 *.log
+*.tmp
 *.swp
-*.swo
 *~
-*.bak
 
-# Environment variables
+############################################
+
+# ENV / SECRETS
+
+############################################
 .env
 .env.*
-*.env
+*.pem
+*.key
+*.crt
 
 ############################################
-# PYTHON
+
+# FLUTTER / DART (SAFE)
+
 ############################################
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
-*$py.class
 
-# C extensions
-*.so
+# Build outputs (DO NOT COMMIT)
 
-# Distribution / packaging
-.Python
 build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-*.egg-info/
-.installed.cfg
-*.egg
 
-# PyInstaller
-*.manifest
-*.spec
+# Dart / Flutter tool files
 
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
-
-# Unit test / coverage
-htmlcov/
-.tox/
-.nox/
-.coverage
-.coverage.*
-.cache
-pytest_cache/
-nosetests.xml
-coverage.xml
-*.cover
-*.py,cover
-.hypothesis/
-
-# Jupyter Notebook
-.ipynb_checkpoints
-
-# pyenv
-.python-version
-
-# mypy
-.mypy_cache/
-.dmypy.json
-dmypy.json
-
-# Pyre
-.pyre/
-
-# Ruff
-.ruff_cache/
-
-############################################
-# VIRTUAL ENVIRONMENTS
-############################################
-venv/
-env/
-ENV/
-.venv/
-.ENV/
-env.bak/
-venv.bak/
-
-############################################
-# DJANGO / FLASK / FASTAPI
-############################################
-*.sqlite3
-db.sqlite3
-instance/
-.webassets-cache
-
-############################################
-# FLUTTER / DART
-############################################
-# Flutter
+.dart_tool/
 .flutter-plugins
 .flutter-plugins-dependencies
-.packages
-.pub-cache/
 .pub/
-build/
-.dart_tool/
-.flutter-versions
+.pub-cache/
+
+# IDEs
+
 .idea/
 .vscode/
 
-# Dart
-*.dart_tool/
-*.flutter-plugins
-*.flutter-plugins-dependencies
-.pubspec.lock
+# Optional: keep pubspec.lock for apps (recommended)
+
+# pubspec.lock
 
 ############################################
-# ANDROID (Flutter)
+
+# ANDROID
+
 ############################################
 android/.gradle/
 android/app/build/
 android/local.properties
-android/.idea/
-android/captures/
 *.apk
 *.aab
 
 ############################################
-# IOS (Flutter)
+
+# IOS
+
 ############################################
 ios/Pods/
 ios/.symlinks/
 ios/Flutter/Flutter.framework
 ios/Flutter/Flutter.podspec
-ios/Runner.xcworkspace/
-ios/Runner.xcodeproj/project.xcworkspace/
 ios/DerivedData/
 
 ############################################
-# WEB / FRONTEND
-############################################
-# Node
-node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
 
-# Build outputs
-dist/
-build/
-out/
-.next/
-.nuxt/
-.cache/
+# MACOS
 
 ############################################
-# IDEs & EDITORS
-############################################
-# VS Code
-.vscode/
-*.code-workspace
-
-# JetBrains
-.idea/
-*.iml
-
-# Sublime
-*.sublime-project
-*.sublime-workspace
+macos/Pods/
+macos/DerivedData/
 
 ############################################
-# VERSION CONTROL / CI
-############################################
-# Git
-*.orig
 
-# GitHub Actions
-.github/workflows/*.log
+# WINDOWS
 
 ############################################
-# LOGS & RUNTIME FILES
-############################################
-logs/
-*.log
-*.pid
-*.seed
-*.pid.lock
+windows/flutter/ephemeral/
 
 ############################################
-# DATABASES
-############################################
-*.db
-*.sqlite
-*.sqlite3
+
+# LINUX
 
 ############################################
-# SECURITY / SECRETS
-############################################
-secrets.json
-*.pem
-*.key
-*.crt
-*.p12
-*.pfx
+linux/flutter/ephemeral/
 
 ############################################
-# DATA SCIENCE / ML
-############################################
-# Models
-*.h5
-*.hdf5
-*.ckpt
-*.pb
-*.onnx
-*.pt
-*.pth
 
-# Data
-data/
-datasets/
-*.csv
-*.tsv
-*.parquet
+# WEB
 
 ############################################
-# DOCKER
-############################################
-.dockerignore
-Dockerfile.local
-docker-compose.override.yml
+build/web/
 
 ############################################
-# MISC
-############################################
-*.tgz
-*.gz
-*.zip
-*.rar
-*.7z
+
+# TEST / COVERAGE
 
 ############################################
-# OPTIONAL (UNCOMMENT IF NEEDED)
-############################################
-# Ignore migrations (Django - usually NOT recommended)
-# */migrations/*
-# !*/migrations/__init__.py
-
-# Ignore lock files (depends on workflow)
-# poetry.lock
-# Pipfile.lock
-# pubspec.lock
+coverage/

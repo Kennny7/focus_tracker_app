@@ -15,12 +15,6 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - name: Debug project structure
-        run: |
-          pwd
-          ls -la
-          ls -la lib
-
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -35,6 +29,12 @@ jobs:
 
       - name: Get dependencies
         run: flutter pub get
+
+      - name: Debug project structure
+        run: |
+          pwd
+          ls -la
+          ls -la lib
 
       - name: Build Windows
         run: flutter build windows --release
@@ -55,12 +55,6 @@ jobs:
     runs-on: macos-latest
 
     steps:
-      - name: Debug project structure
-        run: |
-          pwd
-          ls -la
-          ls -la lib
-        
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -76,6 +70,12 @@ jobs:
       - name: Get dependencies
         run: flutter pub get
 
+      - name: Debug project structure
+        run: |
+          pwd
+          ls -la
+          ls -la lib
+        
       - name: Build macOS
         run: flutter build macos --release
 

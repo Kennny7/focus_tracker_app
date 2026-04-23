@@ -10,10 +10,17 @@ env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
+  
   build-windows:
     runs-on: windows-latest
 
     steps:
+      - name: Debug project structure
+        run: |
+          pwd
+          ls -la
+          ls -la lib
+
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -48,6 +55,12 @@ jobs:
     runs-on: macos-latest
 
     steps:
+      - name: Debug project structure
+        run: |
+          pwd
+          ls -la
+          ls -la lib
+        
       - name: Checkout code
         uses: actions/checkout@v4
 

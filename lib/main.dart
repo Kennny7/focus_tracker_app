@@ -40,7 +40,7 @@ class _PunishmentFocusAppState extends State<PunishmentFocusApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Punishment Focus App',
+      title: 'Focus Tracker',
       theme: _darkMode ? _buildDarkTheme() : _buildLightTheme(),
       debugShowCheckedModeBanner: false,
       home: HomeScreen(onDarkModeChanged: setDarkMode),

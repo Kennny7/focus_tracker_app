@@ -10,7 +10,7 @@ env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
-  
+
   build-windows:
     runs-on: windows-latest
 
@@ -33,16 +33,29 @@ jobs:
       - name: Build Windows
         run: flutter build windows --release
 
-      - name: Package Windows build
+      # ZIP (portable version)
+      - name: Package Windows ZIP
         shell: pwsh
         run: |
           Compress-Archive -Path build/windows/x64/runner/Release/* -DestinationPath build/FocusTracker-windows.zip
 
-      - name: Upload artifact
+      # Install Inno Setup
+      - name: Install Inno Setup
+        run: choco install innosetup -y
+
+      # Build installer
+      - name: Create Installer
+        run: |
+          "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" installer.iss
+
+      # Upload BOTH artifacts
+      - name: Upload Windows artifacts
         uses: actions/upload-artifact@v4
         with:
           name: windows-build
-          path: build/FocusTracker-windows.zip
+          path: |
+            build/FocusTracker-windows.zip
+            build/FocusTracker-Setup.exe
 
 
   build-macos:
@@ -99,6 +112,7 @@ jobs:
         with:
           files: |
             FocusTracker-windows.zip
+            FocusTracker-Setup.exe
             FocusTracker-macos.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

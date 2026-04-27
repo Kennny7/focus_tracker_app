@@ -204,6 +204,70 @@ flutter run -d macos
 
 ---
 
+## Installation (Desktop)
+
+---
+
+<details>
+<summary><strong>Windows</strong> (click to expand)</summary>
+
+<br>
+
+### Windows
+
+1. Download the latest `FocusTracker-windows.zip` from the Releases page  
+2. Extract the ZIP file  
+3. Open the extracted folder  
+4. Run `FocusTracker.exe`  
+
+> If Windows shows a security warning:  
+> - Click **More info**  
+> - Click **Run anyway**
+
+</details>
+
+---
+
+<details>
+<summary><strong>macOS</strong> (click to expand)</summary>
+
+<br>
+
+### macOS
+
+1. Download the latest `FocusTracker-macos.zip` from the Releases page  
+2. Extract the ZIP file  
+3. Drag `FocusTracker.app` to your Applications folder (recommended)  
+4. Right-click the app and select **Open**  
+5. Click **Open** in the security prompt  
+
+> This step is required because the app is not signed with an Apple Developer certificate.
+
+</details>
+
+---
+
+<details>
+<summary><strong>macOS Troubleshooting</strong> (click to expand)</summary>
+
+<br>
+
+### macOS (Troubleshooting)
+
+If you see an error like:  
+> "FocusTracker.app is damaged or can’t be opened"
+
+Run the following command in Terminal:
+
+```bash
+xattr -cr /Applications/FocusTracker.app
+```
+
+Then try opening the app again.
+
+</details>
+
+---
 ## Customisation Guide
 
 ### App Icon
